@@ -1,0 +1,84 @@
+.field {
+    position: relative;
+    float: left;
+}
+
+.container {
+    width: 230px;
+    float: left;
+}
+
+.cell {
+    width: 65px;
+    height: 65px;
+    float: left;
+    padding: 5px;
+}
+
+.cell-highlight {
+    background-color: lightpink;
+}
+
+.next-balls {
+    width: 230px;
+    height: 75px;
+}
+
+.ball {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border: 1px solid gray;
+    float: left;
+    position: absolute;
+}
+
+.ball-active {
+    border: 3px solid black;
+}
+
+.yellow {
+    background: yellow;
+}
+
+.red {
+    background: red;
+}
+
+.green {
+    background: greenyellow;
+}
+
+.aqua {
+    background: aqua;
+}
+
+.purple {
+    background: purple;
+}
+
+.blue {
+    background: dodgerblue;
+}
+
+.border-bottom {
+    border-bottom: 1px solid gray;
+}
+
+.border-right {
+    border-right: 1px solid gray;
+}
+
+.move-ball {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin: 25px auto;
+    background-color: lightgreen;
+}
+
+.points {
+    padding: 50px;
+    text-align: center;
+    font-size: 60px;
+}

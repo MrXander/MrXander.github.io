@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="engine.js"></script>
+    <script src="grid.js"></script>
+    <script src="cell.js"></script>
+    <script src="ball.js"></script>
+    <script src="setup.js"></script>
+    <script src="aStarSearch.js"></script>
+    <script>
+        window.onload = function () {
+            grid.drawGrid(field);
+            engine.initialize();
+            engine.drawBalls();
+
+//            testHorizontalCollision();
+//            testVerticalCollision();
+//            testLeftToRightCollision();
+            testRightToLeftCollision();
+        };
+
+        function testHorizontalCollision() {
+            console.log('horizontal test start');
+            //horizontal x = 0, y = 0 : 4
+            engine.balls[0] = new Ball(setup.colorClass[0], 0, 0);
+            engine.balls[1] = new Ball(setup.colorClass[0], 0, 1);
+            engine.balls[2] = new Ball(setup.colorClass[0], 0, 2);
+            engine.balls[3] = new Ball(setup.colorClass[0], 0, 3);
+            engine.balls[4] = new Ball(setup.colorClass[0], 0, 4);
+            engine.detectCollision(0, 0);
+            for(var i = 0; i < engine.balls.length; i++) {
+                var b = engine.balls[i];
+                if (b.x === 0 && (b.y === 0 || b.y === 1 || b.y === 2 || b.y === 3 || b.y === 4)){
+                    console.log('x = ' + b.x + '; y = ' + b.y + '; success');
+               }
+            }
+            console.log('horizontal test end');
+        }
+
+        function testVerticalCollision() {
+            console.log('vertical test start');
+            //horizontal y = 1, y = 1:6
+            engine.balls[0] = new Ball(setup.colorClass[0], 1, 1);
+            engine.balls[1] = new Ball(setup.colorClass[0], 2, 1);
+            engine.balls[2] = new Ball(setup.colorClass[0], 3, 1);
+            engine.balls[3] = new Ball(setup.colorClass[0], 4, 1);
+            engine.balls[4] = new Ball(setup.colorClass[0], 5, 1);
+            engine.detectCollision(1, 2);
+            for(var i = 0; i < engine.balls.length; i++) {
+                var b = engine.balls[i];
+                if (b.y === 1 && (b.x === 1 || b.x === 2 || b.x === 3 || b.x === 4 || b.x === 5)){
+                    console.log('x = ' + b.x + '; y = ' + b.y + '; success');
+                }
+            }
+            console.log('vertical test end');
+        }
+
+        function testLeftToRightCollision() {
+            console.log('LeftToRight test start');
+            for (var i = 1; i < 6; i++) {
+                var x = i;
+                var y = i;
+                var c = grid.field[x][y];
+                var b = new Ball(setup.colorClass[0], x, y);
+                c.ball = b;
+                engine.balls.push(b);
+            }
+
+            var paths = engine.detectCollision(2, 2);
+            var p = paths[0];
+            if (p[0].x === 1 && p[0].y === 1 && p[1].x === 2 && p[1].y === 2 && p[2].x === 3 && p[2].y === 3 && p[3].x === 4 && p[3].y === 4 && p[4].x === 5 && p[4].y === 5)
+                console.log('test success');
+
+            console.log('LeftToRight test end');
+        }
+
+        function testRightToLeftCollision() {
+            console.log('RightToLeft test start');
+            for (var x = 1, y = 8; x < 6; x++, y--) {
+                //console.log('x = ' + x + '; y = ' + y);
+                var c = grid.field[x][y];
+                var b = new Ball(setup.colorClass[0], x, y);
+                c.ball = b;
+                engine.balls.push(b);
+            }
+
+            var paths = engine.detectCollision(2, 7);
+            var p = paths[0];
+            if (p[0].x === 1 && p[0].y === 8 && p[1].x === 2 && p[1].y === 7 && p[2].x === 3 && p[2].y === 6 && p[3].x === 4 && p[3].y === 5 && p[4].x === 5 && p[4].y === 4)
+                console.log('test success');
+
+            console.log('RightToLeft test end');
+        }
+    </script>
+</head>
+<body>
+<div id="field" class="field">
+    <!--<div class="cell">
+       <div class="ball blue"></div>
+   </div>-->
+</div>
+<div class="next-balls">
+    <!--<div class="cell">
+        <div class="ball blue"></div>
+    </div>-->
+</div>
+</body>
+</html>
