@@ -76,11 +76,6 @@ engine.getBalls = function () {
         engine.balls[x][y] = b;
     }
 
-    if (engine.availableBalls.length === 0)
-    {
-        alert('game over');
-    }
-
     return balls;
 };
 
@@ -95,7 +90,6 @@ engine.drawBalls = function () {
         var paths = engine.detectCollision(b.x, b.y);
         engine.destroyBalls(paths);
     }
-
     engine.drawNextBalls();
 };
 
